@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="管理職向けのAI業務効率化診断。会議資料づくりで削減できる時間と、最初にAIを試す工程が分かります。">
+  <title>AI業務効率化診断</title>
+  <style>
+    :root{--blue:#1463ff;--blue2:#0b48c8;--navy:#10233f;--ink:#18243a;--muted:#64748b;--line:#dfe7f2;--soft:#f3f7ff;--success:#067a55;--white:#fff;--shadow:0 20px 50px rgba(26,61,122,.11);--radius:24px}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;font-family:"Noto Sans JP","Yu Gothic UI",Meiryo,sans-serif;color:var(--ink);background:radial-gradient(circle at 10% 0%,#eaf2ff 0,transparent 28%),linear-gradient(180deg,#f8fbff,#eef4fb);line-height:1.7}
+    button{font:inherit}.app{width:min(1040px,calc(100% - 32px));margin:auto;min-height:100vh;display:grid;place-items:center;padding:32px 0 52px}.screen{display:none;width:100%}.screen.active{display:block;animation:enter .4s ease both}@keyframes enter{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+    .card{background:rgba(255,255,255,.96);border:1px solid rgba(216,227,242,.9);border-radius:var(--radius);box-shadow:var(--shadow)}.hero{position:relative;overflow:hidden;text-align:center;padding:clamp(48px,8vw,88px) clamp(24px,7vw,76px)}.hero:after{content:"";position:absolute;width:240px;height:240px;border-radius:50%;right:-120px;bottom:-120px;background:linear-gradient(135deg,#dbe8ff,#f6f9ff)}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:7px 13px;border-radius:99px;background:#eaf2ff;color:var(--blue2);font-size:.82rem;font-weight:800;letter-spacing:.08em}.eyebrow:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--blue)}h1{font-size:clamp(2.15rem,6vw,4.3rem);line-height:1.18;letter-spacing:-.04em;margin:24px 0 14px;color:var(--navy)}.lead{font-size:clamp(1.05rem,2.4vw,1.35rem);font-weight:700;margin:0 auto;color:#354663}.time{margin:18px 0 30px;color:var(--muted);font-size:.94rem}.btn{position:relative;z-index:1;border:0;border-radius:13px;padding:14px 22px;font-weight:800;cursor:pointer;transition:.2s ease;display:inline-flex;align-items:center;justify-content:center;gap:9px}.btn:hover{transform:translateY(-2px)}.btn:focus-visible,.option:focus-visible{outline:3px solid rgba(20,99,255,.28);outline-offset:3px}.primary{color:#fff;background:linear-gradient(135deg,var(--blue),var(--blue2));box-shadow:0 10px 25px rgba(20,99,255,.25)}.secondary{color:var(--blue2);background:#eaf2ff}.ghost{color:#41516b;background:#fff;border:1px solid var(--line)}
+    .quiz{padding:clamp(22px,5vw,48px)}.quiz-top{display:flex;align-items:center;gap:16px;margin-bottom:34px}.progress-track{height:8px;flex:1;border-radius:99px;background:#e8eef7;overflow:hidden}.progress-bar{height:100%;width:14.28%;border-radius:inherit;background:linear-gradient(90deg,var(--blue),#51a1ff);transition:width .35s ease}.step-count{font-size:.87rem;color:var(--muted);font-weight:800;white-space:nowrap}.question-label{color:var(--blue);font-size:.8rem;font-weight:900;letter-spacing:.12em}.question{font-size:clamp(1.35rem,3.2vw,2rem);line-height:1.45;margin:7px 0 24px;color:var(--navy)}.options{display:grid;gap:11px}.option{width:100%;text-align:left;border:1px solid var(--line);border-radius:15px;background:#fff;color:var(--ink);padding:17px 18px;cursor:pointer;font-weight:700;transition:.2s ease}.option:hover{border-color:#80adff;background:#f7faff;transform:translateX(3px)}
+    .result-wrap{display:grid;gap:18px}.result-hero{padding:clamp(28px,6vw,56px);text-align:center;background:linear-gradient(145deg,#0c3c9d,#1367f5);color:white;overflow:hidden;position:relative}.result-hero:before{content:"";position:absolute;inset:auto -10% -80% 40%;height:300px;background:rgba(255,255,255,.08);border-radius:50%}.result-hero .eyebrow{background:rgba(255,255,255,.14);color:#fff}.big-result{font-size:clamp(2.3rem,7vw,5rem);font-weight:900;line-height:1.15;letter-spacing:-.04em;margin:24px 0 8px}.big-result strong{color:#9ed0ff}.days-result{font-size:clamp(1.05rem,2.5vw,1.45rem);font-weight:800;margin:0}.assumption{font-size:.78rem;color:#d7e5ff;margin:13px 0 0}
+    .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.metric{padding:22px 18px}.metric span{display:block;color:var(--muted);font-size:.78rem;font-weight:700}.metric strong{display:block;color:var(--navy);font-size:clamp(1.35rem,3vw,1.9rem);margin-top:4px}.metric.highlight{background:#eff6ff;border-color:#bed4ff}.metric.highlight strong{color:var(--blue2)}.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}.section-card{padding:clamp(22px,4vw,32px)}.section-title{font-size:1.15rem;margin:0 0 16px;color:var(--navy)}.stars{font-size:1.75rem;letter-spacing:.1em;color:#f5ac18;line-height:1}.stars span{color:#d9e1ec}.compatibility{display:flex;align-items:center;gap:14px;flex-wrap:wrap}.compatibility b{color:var(--blue2)}.priority{border-left:4px solid var(--blue);padding-left:16px}.priority strong{font-size:1.18rem;color:var(--navy)}.priority p{margin:5px 0 0;color:var(--muted);font-size:.92rem}.check-list{list-style:none;padding:0;margin:0;display:grid;gap:11px}.check-list li{display:flex;gap:10px;align-items:flex-start}.check{width:22px;height:22px;flex:0 0 22px;border-radius:7px;display:grid;place-items:center;font-size:.72rem;font-weight:900}.ai .check{background:#e6f0ff;color:var(--blue)}.human .check{background:#e9f7f1;color:var(--success)}
+    .message-card{text-align:center;background:linear-gradient(135deg,#f0f6ff,#fff);padding:clamp(28px,5vw,42px)}.message-card p{font-size:clamp(1.05rem,2.4vw,1.3rem);font-weight:800;margin:0;color:var(--navy)}.actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:22px}.reveal{display:none;margin-top:22px;text-align:left;padding:20px;background:#fff;border:1px solid var(--line);border-radius:15px}.reveal.open{display:block;animation:enter .3s ease}.prompt-text{margin:0 0 14px;padding:16px;border-radius:12px;background:#f7f9fc;color:#30415d}.copy-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.copy-status{font-size:.85rem;font-weight:800;color:var(--success)}.roadmap{display:grid;grid-template-columns:repeat(5,1fr);align-items:center;gap:6px;text-align:center}.road-step{padding:15px 8px;border-radius:12px;background:#edf4ff;color:var(--blue2);font-weight:800;font-size:.88rem}.arrow{display:none;color:var(--blue);font-weight:900}.restart{text-align:center;padding:10px 0 4px}.footer-note{text-align:center;color:#77869d;font-size:.75rem;margin:15px 0 0}
+    @media(max-width:760px){.metrics{grid-template-columns:1fr 1fr}.grid-2{grid-template-columns:1fr}.roadmap{grid-template-columns:1fr}.arrow{display:block}.result-wrap{gap:12px}.app{width:min(100% - 20px,1040px);padding:16px 0 30px}.hero,.quiz{border-radius:20px}.option{padding:15px}.actions .btn{width:100%}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <main class="app">
+    <section id="home" class="screen active" aria-labelledby="main-title">
+      <div class="card hero">
+        <span class="eyebrow">MANAGEMENT × AI</span>
+        <h1 id="main-title">AI業務効率化診断</h1>
+        <p class="lead">あなたの業務はどれくらいAIへ任せられるでしょうか？</p>
+        <p class="time">診断時間：約3分</p>
+        <button class="btn primary" id="startBtn">診断を始める <span aria-hidden="true">→</span></button>
+      </div>
+    </section>
+
+    <section id="quiz" class="screen" aria-labelledby="questionText">
+      <div class="card quiz">
+        <div class="quiz-top"><div class="progress-track" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div><span class="step-count" id="stepCount">1 / 7</span></div>
+        <span class="question-label" id="questionLabel">QUESTION 01</span>
+        <h2 class="question" id="questionText"></h2>
+        <div class="options" id="options"></div>
+      </div>
+    </section>
+
+    <section id="result" class="screen" aria-labelledby="resultTitle">
+      <div class="result-wrap">
+        <div class="card result-hero"><span class="eyebrow">YOUR AI POTENTIAL</span><div class="big-result" id="resultTitle">年間<strong id="annualHours">—</strong>時間<br>削減できます</div><p class="days-result">約<span id="businessDays">—</span>営業日分の業務時間を削減できます</p><p class="assumption">※週1回、同程度の会議資料を作成する場合の概算です（年間48週で計算）</p></div>
+        <div class="metrics">
+          <div class="card metric"><span>現在の作業時間</span><strong id="currentTime">—</strong></div><div class="card metric"><span>AI導入後の作業時間</span><strong id="afterTime">—</strong></div><div class="card metric highlight"><span>1回あたりの削減時間</span><strong id="savedTime">—</strong></div><div class="card metric highlight"><span>削減割合</span><strong id="savedRate">—</strong></div>
+          <div class="card metric"><span>1週間あたり</span><strong id="weeklyTime">—</strong></div><div class="card metric"><span>1か月あたり</span><strong id="monthlyTime">—</strong></div><div class="card metric"><span>年間削減時間</span><strong id="annualMetric">—</strong></div><div class="card metric"><span>営業日換算（8時間）</span><strong id="daysMetric">—</strong></div>
+        </div>
+        <div class="grid-2">
+          <div class="card section-card"><h2 class="section-title">AIとの相性</h2><div class="compatibility"><div class="stars" id="stars" aria-label="5段階評価"></div><b id="compatText"></b></div></div>
+          <div class="card section-card"><h2 class="section-title">最優先で改善すべき工程</h2><div class="priority"><strong id="priorityName">—</strong><p id="priorityReason">—</p></div></div>
+        </div>
+        <div class="grid-2">
+          <div class="card section-card"><h2 class="section-title">AIに任せる工程</h2><ul class="check-list ai"><li><span class="check">AI</span><span>複数資料の要点抽出・重複整理</span></li><li><span class="check">AI</span><span>目次とスライド構成のたたき台</span></li><li><span class="check">AI</span><span>文章の要約・発表原稿の初稿</span></li></ul></div>
+          <div class="card section-card"><h2 class="section-title">人が行う工程</h2><ul class="check-list human"><li><span class="check">人</span><span>情報の正確性と機密性の確認</span></li><li><span class="check">人</span><span>意思決定・優先順位づけ</span></li><li><span class="check">人</span><span>自社らしい表現への最終調整</span></li></ul></div>
+        </div>
+        <div class="card message-card">
+          <p>最初からすべてをAIへ任せる必要はありません。<br>まずは情報整理だけ試してみましょう。</p>
+          <div class="actions"><button class="btn primary" id="promptBtn" aria-expanded="false">情報整理プロンプトを見る</button><button class="btn secondary" id="roadmapBtn" aria-expanded="false">次のステップを見る</button></div>
+          <div class="reveal" id="promptPanel"><p class="prompt-text" id="promptText">以下の資料を読み込み、重要なポイント・重複している内容・不足している情報・会議資料へ入れるべき項目を整理してください。最後に会議資料の目次案も作成してください。</p><div class="copy-row"><button class="btn secondary" id="copyBtn">プロンプトをコピーする</button><span class="copy-status" id="copyStatus" role="status" aria-live="polite"></span></div></div>
+          <div class="reveal" id="roadmapPanel"><div class="roadmap"><div class="road-step">STEP1<br>情報整理</div><span class="arrow">↓</span><div class="road-step">STEP2<br>目次作成</div><span class="arrow">↓</span><div class="road-step">STEP3<br>スライド作成</div><span class="arrow">↓</span><div class="road-step">STEP4<br>発表原稿</div><span class="arrow">↓</span><div class="road-step">STEP5<br>最終確認</div></div></div>
+        </div>
+        <div class="restart"><button class="btn ghost" id="restartBtn">もう一度診断する</button><p class="footer-note">この診断結果は回答に基づく目安です。業務内容やAIの利用環境により異なります。</p></div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    'use strict';
+
+    // 質問データと各回答の効率化余地（0＝すでに効率的、4＝改善余地が大きい）を一元管理します。
+    const questions = [
+      { text:'会議資料を1回作成するのにどれくらい時間がかかりますか？', options:['30分以内','30分～1時間','1～2時間','2～3時間','3時間以上'], values:[.4,.75,1.5,2.5,3.5] },
+      { text:'会議資料を作成する際、参考資料はどのような状態ですか？', options:['毎回、紙資料やメールなど複数の場所から集めている','過去資料はあるがPDF・Word・Excelなど複数形式で管理している','フォルダやクラウドに整理されており、すぐ利用できる','AIも活用しながら資料を整理・活用している'], values:[4,3,1,0] },
+      { text:'参考にする資料はどれくらいありますか？', options:['1～2件','3～5件','6～10件','10件以上'], values:[1,2,3,4] },
+      { text:'会議資料の構成（目次）は普段どのように作成していますか？', options:['毎回ゼロから考えている','過去資料を流用している','テンプレートを利用している','AIで目次を作成している'], values:[4,2,1,0] },
+      { text:'スライドはどのように作成していますか？', options:['毎回ゼロから作成している','過去資料を流用している','テンプレートを利用している','AIを活用している'], values:[4,2,1,0] },
+      { text:'発表準備はどのようにしていますか？', options:['原稿をすべて作成している','箇条書きだけ作成している','スライドのみで発表している','AIを活用している'], values:[4,2,1,0] },
+      { text:'発表時間はどれくらいですか？', options:['5分以内','10分程度','15～30分','30分以上'], values:[.25,.5,1,1.5] }
+    ];
+
+    let currentQuestion = 0;
+    let answers = [];
+    const $ = id => document.getElementById(id);
+
+    // 画面を切り替え、読み上げやキーボード操作でも自然な位置へ戻します。
+    function showScreen(id){
+      document.querySelectorAll('.screen').forEach(el => el.classList.toggle('active', el.id === id));
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+
+    // 現在の質問を描画します。選択した時点で次の質問へ進みます。
+    function renderQuestion(){
+      const q = questions[currentQuestion];
+      $('questionText').textContent = q.text;
+      $('questionLabel').textContent = `QUESTION ${String(currentQuestion + 1).padStart(2,'0')}`;
+      $('stepCount').textContent = `${currentQuestion + 1} / ${questions.length}`;
+      $('progressBar').style.width = `${((currentQuestion + 1) / questions.length) * 100}%`;
+      $('options').replaceChildren(...q.options.map((label,index) => {
+        const button = document.createElement('button');
+        button.className = 'option'; button.type = 'button'; button.textContent = label;
+        button.addEventListener('click', () => selectAnswer(index));
+        return button;
+      }));
+    }
+
+    function selectAnswer(index){
+      answers[currentQuestion] = index;
+      if(currentQuestion < questions.length - 1){ currentQuestion++; renderQuestion(); }
+      else { calculateResult(); showScreen('result'); }
+    }
+
+    // 回答から工程別の改善余地を算出し、最も効果の高い工程を提案します。
+    function calculateResult(){
+      const currentHours = questions[0].values[answers[0]];
+      const scores = {
+        '情報整理': questions[1].values[answers[1]] * 1.2 + questions[2].values[answers[2]] * .8,
+        '目次作成': questions[3].values[answers[3]] * 1.4,
+        'スライド作成': questions[4].values[answers[4]] * 1.5,
+        '発表準備': questions[5].values[answers[5]] + questions[6].values[answers[6]]
+      };
+      const totalOpportunity = Object.values(scores).reduce((a,b) => a+b, 0);
+      // 削減率は15〜68%の範囲に収め、非現実的な過大表示を避けます。
+      const reductionRate = Math.min(.68, .15 + (totalOpportunity / 25) * .53);
+      const saved = currentHours * reductionRate;
+      const after = currentHours - saved;
+      const annual = saved * 48;
+      const days = annual / 8;
+      const [priorityName] = Object.entries(scores).sort((a,b) => b[1]-a[1])[0];
+      const reasons = {
+        '情報整理':'資料の収集・読み込み・重複確認をAIで下準備すると、後工程もまとめて短縮しやすいためです。',
+        '目次作成':'目的と要点を渡して構成案を複数出すことで、ゼロから考える時間を減らせるためです。',
+        'スライド作成':'構成から本文のたたき台までAIに任せることで、作成時間への効果が大きいためです。',
+        '発表準備':'発表時間に合わせた原稿や想定質問の初稿をAIで素早く用意できるためです。'
+      };
+      const starCount = Math.max(1, Math.min(5, Math.ceil(totalOpportunity / 5)));
+      const compatibility = ['小さく試すのがおすすめ','一部工程で効果あり','相性は良好です','高い効果が期待できます','非常に相性が良いです'][starCount-1];
+      const format = hours => hours < 1 ? `${Math.round(hours*60)}分` : `${hours.toFixed(1).replace('.0','')}時間`;
+
+      $('currentTime').textContent = format(currentHours); $('afterTime').textContent = format(after);
+      $('savedTime').textContent = format(saved); $('savedRate').textContent = `${Math.round(reductionRate*100)}%`;
+      $('weeklyTime').textContent = format(saved); $('monthlyTime').textContent = format(saved*4);
+      $('annualHours').textContent = Math.round(annual); $('annualMetric').textContent = `${Math.round(annual)}時間`;
+      $('businessDays').textContent = days.toFixed(1); $('daysMetric').textContent = `${days.toFixed(1)}日`;
+      $('priorityName').textContent = priorityName; $('priorityReason').textContent = reasons[priorityName];
+      $('stars').innerHTML = '★'.repeat(starCount) + '<span>' + '★'.repeat(5-starCount) + '</span>';
+      $('stars').setAttribute('aria-label', `AIとの相性 5段階中${starCount}`); $('compatText').textContent = compatibility;
+    }
+
+    // パネルの表示状態とaria属性を揃え、支援技術にも状態を伝えます。
+    function togglePanel(buttonId,panelId){
+      const panel = $(panelId); const open = panel.classList.toggle('open');
+      $(buttonId).setAttribute('aria-expanded', String(open));
+      if(open) panel.scrollIntoView({behavior:'smooth',block:'nearest'});
+    }
+
+    $('startBtn').addEventListener('click', () => { currentQuestion=0; answers=[]; renderQuestion(); showScreen('quiz'); });
+    $('promptBtn').addEventListener('click', () => togglePanel('promptBtn','promptPanel'));
+    $('roadmapBtn').addEventListener('click', () => togglePanel('roadmapBtn','roadmapPanel'));
+    $('copyBtn').addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText($('promptText').textContent); $('copyStatus').textContent='コピーしました'; }
+      catch { $('copyStatus').textContent='コピーできませんでした。文章を選択してコピーしてください。'; }
+      setTimeout(() => { $('copyStatus').textContent=''; }, 3000);
+    });
+    $('restartBtn').addEventListener('click', () => { currentQuestion=0; answers=[]; $('promptPanel').classList.remove('open'); $('roadmapPanel').classList.remove('open'); showScreen('home'); });
+  </script>
+</body>
+</html>
