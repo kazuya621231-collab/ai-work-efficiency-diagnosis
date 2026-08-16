@@ -8,16 +8,17 @@
   <style>
     :root{--blue:#1463ff;--blue2:#0b48c8;--navy:#10233f;--ink:#18243a;--muted:#64748b;--line:#dfe7f2;--soft:#f3f7ff;--success:#067a55;--white:#fff;--shadow:0 20px 50px rgba(26,61,122,.11);--radius:24px}
     *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;font-family:"Noto Sans JP","Yu Gothic UI",Meiryo,sans-serif;color:var(--ink);background:radial-gradient(circle at 10% 0%,#eaf2ff 0,transparent 28%),linear-gradient(180deg,#f8fbff,#eef4fb);line-height:1.7}
-    button{font:inherit}.app{width:min(1040px,calc(100% - 32px));margin:auto;min-height:100vh;display:grid;place-items:center;padding:32px 0 52px}.screen{display:none;width:100%}.screen.active{display:block;animation:enter .4s ease both}@keyframes enter{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+    button{font:inherit}.app{width:min(1040px,calc(100% - 32px));margin:auto;min-height:100vh;display:grid;place-items:center;padding:32px 0 52px}.screen{display:none;width:100%;min-width:0}.screen.active{display:block;animation:enter .4s ease both}@keyframes enter{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
     .card{background:rgba(255,255,255,.96);border:1px solid rgba(216,227,242,.9);border-radius:var(--radius);box-shadow:var(--shadow)}.hero{position:relative;overflow:hidden;text-align:center;padding:clamp(48px,8vw,88px) clamp(24px,7vw,76px)}.hero:after{content:"";position:absolute;width:240px;height:240px;border-radius:50%;right:-120px;bottom:-120px;background:linear-gradient(135deg,#dbe8ff,#f6f9ff)}
     .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:7px 13px;border-radius:99px;background:#eaf2ff;color:var(--blue2);font-size:.82rem;font-weight:800;letter-spacing:.08em}.eyebrow:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--blue)}h1{font-size:clamp(2.15rem,6vw,4.3rem);line-height:1.18;letter-spacing:-.04em;margin:24px 0 14px;color:var(--navy)}.lead{font-size:clamp(1.05rem,2.4vw,1.35rem);font-weight:700;margin:0 auto;color:#354663}.time{margin:18px 0 30px;color:var(--muted);font-size:.94rem}.btn{position:relative;z-index:1;border:0;border-radius:13px;padding:14px 22px;font-weight:800;cursor:pointer;transition:.2s ease;display:inline-flex;align-items:center;justify-content:center;gap:9px}.btn:hover{transform:translateY(-2px)}.btn:focus-visible,.option:focus-visible{outline:3px solid rgba(20,99,255,.28);outline-offset:3px}.primary{color:#fff;background:linear-gradient(135deg,var(--blue),var(--blue2));box-shadow:0 10px 25px rgba(20,99,255,.25)}.secondary{color:var(--blue2);background:#eaf2ff}.ghost{color:#41516b;background:#fff;border:1px solid var(--line)}
     .quiz{padding:clamp(22px,5vw,48px)}.quiz-top{display:flex;align-items:center;gap:16px;margin-bottom:34px}.progress-track{height:8px;flex:1;border-radius:99px;background:#e8eef7;overflow:hidden}.progress-bar{height:100%;width:14.28%;border-radius:inherit;background:linear-gradient(90deg,var(--blue),#51a1ff);transition:width .35s ease}.step-count{font-size:.87rem;color:var(--muted);font-weight:800;white-space:nowrap}.question-label{color:var(--blue);font-size:.8rem;font-weight:900;letter-spacing:.12em}.question{font-size:clamp(1.35rem,3.2vw,2rem);line-height:1.45;margin:7px 0 24px;color:var(--navy)}.options{display:grid;gap:11px}.option{width:100%;text-align:left;border:1px solid var(--line);border-radius:15px;background:#fff;color:var(--ink);padding:17px 18px;cursor:pointer;font-weight:700;transition:.2s ease;-webkit-tap-highlight-color:transparent}.option:active{background:#edf4ff;border-color:#80adff}
-    .result-wrap{display:grid;gap:18px}.result-hero{padding:clamp(28px,6vw,56px);text-align:center;background:linear-gradient(145deg,#0c3c9d,#1367f5);color:white;overflow:hidden;position:relative}.result-hero:before{content:"";position:absolute;inset:auto -10% -80% 40%;height:300px;background:rgba(255,255,255,.08);border-radius:50%}.result-hero .eyebrow{background:rgba(255,255,255,.14);color:#fff}.big-result{font-size:clamp(2.3rem,7vw,5rem);font-weight:900;line-height:1.15;letter-spacing:-.04em;margin:24px 0 8px}.big-result strong{color:#9ed0ff}.days-result{font-size:clamp(1.05rem,2.5vw,1.45rem);font-weight:800;margin:0}.assumption{font-size:.78rem;color:#d7e5ff;margin:13px 0 0}
-    .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.metric{padding:22px 18px}.metric span{display:block;color:var(--muted);font-size:.78rem;font-weight:700}.metric strong{display:block;color:var(--navy);font-size:clamp(1.35rem,3vw,1.9rem);margin-top:4px}.metric.highlight{background:#eff6ff;border-color:#bed4ff}.metric.highlight strong{color:var(--blue2)}.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}.section-card{padding:clamp(22px,4vw,32px)}.section-title{font-size:1.15rem;margin:0 0 16px;color:var(--navy)}.stars{font-size:1.75rem;letter-spacing:.1em;color:#f5ac18;line-height:1}.stars span{color:#d9e1ec}.compatibility{display:flex;align-items:center;gap:14px;flex-wrap:wrap}.compatibility b{color:var(--blue2)}.priority{border-left:4px solid var(--blue);padding-left:16px}.priority strong{font-size:1.18rem;color:var(--navy)}.priority p{margin:5px 0 0;color:var(--muted);font-size:.92rem}.check-list{list-style:none;padding:0;margin:0;display:grid;gap:11px}.check-list li{display:flex;gap:10px;align-items:flex-start}.check{width:22px;height:22px;flex:0 0 22px;border-radius:7px;display:grid;place-items:center;font-size:.72rem;font-weight:900}.ai .check{background:#e6f0ff;color:var(--blue)}.human .check{background:#e9f7f1;color:var(--success)}
+    .result-wrap{display:grid;grid-template-columns:minmax(0,1fr);gap:18px;min-width:0}.result-hero{padding:clamp(28px,6vw,56px);text-align:center;background:linear-gradient(145deg,#0c3c9d,#1367f5);color:white;overflow:hidden;position:relative}.result-hero:before{content:"";position:absolute;inset:auto -10% -80% 40%;height:300px;background:rgba(255,255,255,.08);border-radius:50%}.result-hero .eyebrow{background:rgba(255,255,255,.14);color:#fff}.big-result{font-size:clamp(2.3rem,7vw,5rem);font-weight:900;line-height:1.15;letter-spacing:-.04em;margin:24px 0 8px}.big-result strong{color:#9ed0ff}.days-result{font-size:clamp(1.05rem,2.5vw,1.45rem);font-weight:800;margin:0}.assumption{font-size:.78rem;color:#d7e5ff;margin:13px 0 0}
+    .metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.metric{padding:22px 18px}.metric span{display:block;color:var(--muted);font-size:.78rem;font-weight:700}.metric strong{display:block;color:var(--navy);font-size:clamp(1.35rem,3vw,1.9rem);margin-top:4px}.metric.highlight{background:#eff6ff;border-color:#bed4ff}.metric.highlight strong{color:var(--blue2)}.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.section-card{padding:clamp(22px,4vw,32px)}.section-title{font-size:1.15rem;margin:0 0 16px;color:var(--navy)}.stars{font-size:1.75rem;letter-spacing:.1em;color:#f5ac18;line-height:1}.stars span{color:#d9e1ec}.compatibility{display:flex;align-items:center;gap:14px;flex-wrap:wrap}.compatibility b{color:var(--blue2)}.priority{border-left:4px solid var(--blue);padding-left:16px}.priority strong{font-size:1.18rem;color:var(--navy)}.priority p{margin:5px 0 0;color:var(--muted);font-size:.92rem}.check-list{list-style:none;padding:0;margin:0;display:grid;gap:11px}.check-list li{display:flex;gap:10px;align-items:flex-start}.check{width:22px;height:22px;flex:0 0 22px;border-radius:7px;display:grid;place-items:center;font-size:.72rem;font-weight:900}.ai .check{background:#e6f0ff;color:var(--blue)}.human .check{background:#e9f7f1;color:var(--success)}
     .message-card{text-align:center;background:linear-gradient(135deg,#f0f6ff,#fff);padding:clamp(28px,5vw,42px)}.message-card>p{font-size:clamp(1.05rem,2.4vw,1.3rem);font-weight:800;margin:0;color:var(--navy)}.actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:22px}.reveal{display:none;margin-top:22px;text-align:left;padding:clamp(18px,4vw,26px);background:#fff;border:1px solid var(--line);border-radius:15px}.reveal.open{display:block;animation:enter .3s ease}.howto-title{display:flex;align-items:center;gap:10px;margin:0 0 12px;color:var(--navy);font-size:1.2rem}.howto-title:before{content:'✓';display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:#e7f7f0;color:var(--success);font-size:.8rem}.howto-list{margin:0 0 16px;padding:0;list-style:none;counter-reset:steps;display:grid;gap:7px;color:#42536d}.howto-list li{counter-increment:steps}.howto-list li:before{content:counter(steps);display:inline-grid;place-items:center;width:21px;height:21px;margin-right:8px;border-radius:50%;background:#eaf2ff;color:var(--blue2);font-size:.72rem;font-weight:900}.howto-result{margin:0 0 18px;padding:12px 14px;border-radius:10px;background:#f0f9f5;color:#166348;font-size:.9rem;font-weight:700}.prompt-box{overflow:hidden;margin:0 0 16px;border:1px solid #b8c9e6;border-radius:13px;background:#f4f7fb;box-shadow:inset 0 1px 3px rgba(16,35,63,.05)}.prompt-box-title{display:flex;align-items:center;gap:8px;padding:10px 14px;background:#e4ecf7;border-bottom:1px solid #c8d5e8;color:#41516b;font-size:.78rem;font-weight:900;letter-spacing:.04em}.prompt-box-title:before{content:'';width:8px;height:8px;border-radius:50%;background:var(--blue)}.prompt-text{display:block;margin:0;padding:18px;white-space:pre-wrap;font:500 .93rem/1.85 "Noto Sans JP","Yu Gothic UI",Meiryo,sans-serif;color:#263750;overflow-wrap:anywhere}.copy-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.copy-status{font-size:.85rem;font-weight:800;color:var(--success)}
-    .step-stage{display:none}.step-stage.active{display:block;animation:enter .35s ease}.step-card{padding:0!important;overflow:hidden}.step-header{padding:clamp(20px,4vw,28px);background:linear-gradient(135deg,#f4f8ff,#eaf2ff);border-bottom:1px solid var(--line)}.step-kicker{display:flex;justify-content:space-between;gap:12px;color:var(--blue2);font-size:.78rem;font-weight:900;letter-spacing:.08em}.step-heading{display:flex;align-items:center;gap:12px;margin:8px 0 18px;font-size:clamp(1.35rem,3vw,1.8rem);color:var(--navy)}.step-icon{display:grid;place-items:center;width:43px;height:43px;border-radius:13px;background:#fff;box-shadow:0 7px 18px rgba(20,99,255,.12);font-size:1.25rem}.step-progress{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}.step-progress-track{height:9px;border-radius:99px;background:#d9e3f2;overflow:hidden}.step-progress-fill{height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--blue),#54a3ff);transition:width .45s ease}.step-stage.completed .step-progress-fill{background:linear-gradient(90deg,#07966a,#48c79d)}.step-stage.completed .step-progress-label{color:var(--success)}.step-progress-label{color:#52647e;font-size:.78rem;font-weight:900}.step-body{padding:clamp(20px,4vw,30px)}.step-lead{margin:0;color:#3c4e68;font-size:.98rem}.step-lead strong{color:var(--navy)}.step-section-title{margin:25px 0 10px;font-size:1rem;color:var(--navy)}.example-card{padding:18px;border:1px solid #d7e3f3;border-radius:14px;background:#f8fbff}.example-card ol{margin:0;padding-left:1.5rem;display:grid;gap:5px;color:#354863;font-weight:700}.prompt-accordion{margin-top:22px;border:1px solid #cbd9ec;border-radius:14px;background:#fff;overflow:hidden}.prompt-accordion summary{position:relative;padding:16px 44px 16px 17px;cursor:pointer;list-style:none;color:var(--navy);font-weight:900;-webkit-tap-highlight-color:transparent}.prompt-accordion summary::-webkit-details-marker{display:none}.prompt-accordion summary:after{content:'▼';position:absolute;right:17px;color:var(--blue);font-size:.75rem;transition:transform .2s ease}.prompt-accordion[open] summary:after{transform:rotate(180deg)}.accordion-content{padding:0 16px 18px;border-top:1px solid var(--line);background:#f8faff}.accordion-content .prompt-text{padding:17px 2px}.step-complete{display:none;margin-top:22px;padding:18px;border:1px solid #9fd9c3;border-radius:14px;background:#effaf5;text-align:center}.step-complete.show{display:block;animation:enter .35s ease}.complete-icon{display:grid;place-items:center;width:38px;height:38px;margin:0 auto 7px;border-radius:50%;background:#d8f3e7;color:var(--success);font-weight:900}.step-complete strong{display:block;color:#075d43;font-size:1.08rem;letter-spacing:.04em}.step-complete p{margin:3px 0 14px;color:#417061;font-size:.9rem}.restart{text-align:center;padding:10px 0 4px}.footer-note{text-align:center;color:#77869d;font-size:.75rem;margin:15px 0 0}
+    .step-stage{display:none}.step-stage.active{display:block;animation:stepEnter .3s ease both}@keyframes stepEnter{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}.step-card{padding:0!important;overflow:hidden}.step-header{padding:clamp(20px,4vw,28px);background:linear-gradient(135deg,#f4f8ff,#eaf2ff);border-bottom:1px solid var(--line)}.step-kicker{display:flex;justify-content:space-between;gap:12px;color:var(--blue2);font-size:.78rem;font-weight:900;letter-spacing:.08em}.step-heading{display:flex;align-items:center;gap:12px;margin:8px 0 18px;font-size:clamp(1.35rem,3vw,1.8rem);color:var(--navy)}.step-icon{display:grid;place-items:center;width:43px;height:43px;border-radius:13px;background:#fff;box-shadow:0 7px 18px rgba(20,99,255,.12);font-size:1.25rem}.step-progress{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}.step-progress-track{height:9px;border-radius:99px;background:#d9e3f2;overflow:hidden}.step-progress-fill{height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--blue),#54a3ff);transition:width .45s ease}.step-stage.completed .step-progress-fill{background:linear-gradient(90deg,#07966a,#48c79d)}.step-stage.completed .step-progress-label{color:var(--success)}.step-progress-label{color:#52647e;font-size:.78rem;font-weight:900}.step-body{padding:clamp(20px,4vw,30px)}.step-lead{margin:0;color:#3c4e68;font-size:.98rem}.step-lead strong{color:var(--navy)}.step-section-title{margin:25px 0 10px;font-size:1rem;color:var(--navy)}.example-card{padding:18px;border:1px solid #d7e3f3;border-radius:14px;background:#f8fbff}.example-card ol{margin:0;padding-left:1.5rem;display:grid;gap:5px;color:#354863;font-weight:700}.example-sections{display:grid}.example-section{padding:15px 2px;border-bottom:1px solid #d8e2ef}.example-section:first-child{padding-top:0}.example-section:last-child{padding-bottom:0;border-bottom:0}.example-section strong{display:block;margin-bottom:6px;color:var(--navy)}.example-section p{margin:0;color:#42536d;white-space:pre-line}.prompt-accordion{margin-top:22px;border:1px solid #cbd9ec;border-radius:14px;background:#fff;overflow:hidden}.prompt-accordion summary{position:relative;width:100%;padding:16px 44px 16px 17px;cursor:pointer;list-style:none;color:var(--navy);background:#fff;font-weight:900;-webkit-tap-highlight-color:transparent}.prompt-accordion summary::-webkit-details-marker{display:none}.prompt-accordion summary:after{content:'▼';position:absolute;right:17px;color:var(--blue);font-size:.75rem;transition:transform .2s ease}.prompt-accordion[open] summary:after{transform:rotate(180deg)}.accordion-content{padding:0 16px 18px;border-top:1px solid var(--line);background:#f8faff}.accordion-content .prompt-text{padding:17px 2px}.prompt-copy-area{padding-top:14px;border-top:1px solid #dbe4f1}.prompt-copy-area .btn{width:100%}.prompt-copy-area .copy-status{display:block;margin-top:8px;text-align:center}.step-complete{display:none;margin-top:22px;padding:18px;border:1px solid #9fd9c3;border-radius:14px;background:#effaf5;text-align:center}.step-complete.show{display:block;animation:enter .35s ease}.complete-icon{display:grid;place-items:center;width:38px;height:38px;margin:0 auto 7px;border-radius:50%;background:#d8f3e7;color:var(--success);font-weight:900}.step-complete strong{display:block;color:#075d43;font-size:1.08rem;letter-spacing:.04em}.step-complete p{margin:3px 0 14px;color:#417061;font-size:.9rem}.restart{text-align:center;padding:10px 0 4px}.footer-note{text-align:center;color:#77869d;font-size:.75rem;margin:15px 0 0}
+    .mission-list{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;padding:14px;background:#f7faff;border-bottom:1px solid var(--line)}.mission-tab{border:1px solid var(--line);border-radius:11px;background:#fff;padding:11px 8px;color:#76849a;cursor:pointer;font-size:.76rem;font-weight:800;line-height:1.4;transition:.2s ease}.mission-tab.current{border-color:#7ba9ff;background:#eaf2ff;color:var(--blue2);box-shadow:0 5px 14px rgba(20,99,255,.1);font-weight:900}.mission-tab.done{color:var(--success);border-color:#b8dfd0}.mission-tab.current.done{border-color:#7ba9ff;background:#eaf2ff;color:var(--blue2)}.mission-tab .tab-state{display:block;min-height:1.2em;margin-top:2px;font-size:.68rem}.step-nav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:20px}.step-nav-button{flex:0 0 clamp(78px,22vw,106px);min-height:36px;border:1px solid #c6d8f5;border-radius:10px;background:#eaf2ff;color:var(--blue2);cursor:pointer;padding:7px 10px;font-size:.78rem;font-weight:800;transition:transform .15s ease,background .2s ease,border-color .2s ease}.step-nav-button:hover{background:#dce9ff;border-color:#9abcf5}.step-nav-button:active{transform:translateY(2px)}.step-nav-button[hidden]{visibility:hidden;display:block}.step-nav-current{color:var(--blue2);font-size:.88rem;font-weight:900;text-align:center;white-space:nowrap}.step-control{min-height:48px;border-radius:13px;padding:12px 18px;font-weight:800;transition:transform .15s ease,background .2s ease,box-shadow .2s ease}.step-control:active{transform:translateY(2px)}.step-bottom-nav{display:flex;gap:10px;margin-top:22px;padding-top:20px;border-top:1px solid var(--line)}.step-bottom-button{flex:1 1 50%;width:50%}.step-bottom-button[hidden]{visibility:hidden;display:inline-flex}.final-step-complete{background:linear-gradient(145deg,#effaf5,#f7fffb);padding:clamp(24px,5vw,36px)}.congrats{display:block;margin-bottom:5px;color:#087253;font-size:1rem;font-weight:900;letter-spacing:.06em}.final-checklist{list-style:none;margin:20px auto 0;padding:16px;max-width:470px;border-radius:13px;background:#fff;text-align:left;display:grid;gap:8px;color:#285c4b;font-weight:800}.final-after-complete{display:none}.step-stage.completed .final-after-complete{display:block;animation:enter .4s ease}.flow-summary{margin-top:20px;padding:clamp(22px,5vw,32px);border:1px solid #c9d9ef;border-radius:16px;background:linear-gradient(145deg,#f5f9ff,#fff);text-align:center}.flow-summary h3{margin:0 0 18px;color:var(--navy);font-size:1.15rem}.flow-list{display:grid;gap:4px;margin-bottom:18px;color:var(--blue2);font-weight:900}.flow-list span:nth-child(even){color:#8ea1bd}.flow-summary p{margin:0;color:#53647d}.final-cta{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;margin-top:20px}.final-cta .btn{width:100%;min-width:0;white-space:normal}.final-cta .copy-status{grid-column:1/-1}.final-note{margin-top:14px;color:#77869d;font-size:.75rem}
     @media(hover:hover) and (pointer:fine){.option:hover{border-color:#80adff;background:#f7faff;transform:translateX(3px)}}
-    @media(max-width:760px){.metrics{grid-template-columns:1fr 1fr}.grid-2{grid-template-columns:1fr}.result-wrap{gap:12px}.app{width:min(100% - 20px,1040px);padding:16px 0 30px}.hero,.quiz{border-radius:20px}.option{padding:15px}.actions .btn,.step-complete .btn{width:100%}.step-kicker{align-items:flex-start;flex-direction:column}.step-progress{grid-template-columns:1fr}.copy-row .btn{width:100%}}
+    @media(max-width:760px){.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-2{grid-template-columns:minmax(0,1fr)}.result-wrap{gap:12px}.app{width:min(calc(100% - 20px),1040px);padding:16px 0 30px}.hero,.quiz{border-radius:20px}.option{padding:15px}.actions .btn,.step-complete .btn{width:100%}.step-kicker{align-items:flex-start;flex-direction:column}.step-progress{grid-template-columns:1fr}.copy-row .btn{width:100%}.mission-list{grid-template-columns:1fr}.mission-tab{display:grid;grid-template-columns:1fr auto;text-align:left;align-items:center}.mission-tab .tab-state{margin:0}.step-nav{gap:6px}.step-nav-current{font-size:.75rem}.step-nav-button{font-size:.7rem;padding-inline:6px}.step-bottom-nav{flex-direction:column}.step-bottom-button{width:100%}.step-bottom-button[hidden]{display:none}.final-cta{grid-template-columns:minmax(0,1fr)}}
     @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
   </style>
 </head>
@@ -61,66 +62,10 @@
           <p>最初からすべてをAIへ任せる必要はありません。<br>まずは情報整理だけ試してみましょう。</p>
           <div class="actions"><button class="btn primary" id="journeyBtn" aria-expanded="false">ChatGPTで使える文章を見る</button></div>
           <div class="reveal step-card" id="journeyPanel">
-            <article class="step-stage active" id="step1Stage" aria-labelledby="step1Title" data-step="1">
-              <header class="step-header">
-                <div class="step-kicker"><span>STEP1 / 5</span><span>情報整理ミッション</span></div>
-                <h2 class="step-heading" id="step1Title" tabindex="-1"><span class="step-icon" aria-hidden="true">📋</span>情報を整理する</h2>
-                <div class="step-progress" aria-label="全5STEP中1STEP"><div class="step-progress-track"><div class="step-progress-fill" style="width:20%"></div></div><span class="step-progress-label" id="step1Progress">1 / 5 STEP · 20%</span></div>
-              </header>
-              <div class="step-body">
-                <p class="step-lead">最初のミッションは、資料の内容を分かりやすく整理することです。<br><strong>AIに資料の要点や不足情報をまとめてもらうと、目次づくりがスムーズになります。</strong></p>
-                <h3 class="step-section-title">ChatGPTでの進め方</h3>
-                <ol class="howto-list"><li>下の文章をコピーします。</li><li>ChatGPTへ貼り付けます。</li><li>あなたの資料も一緒に送信します。</li></ol>
-                <p class="howto-result">このSTEPを終えると、重要なポイントや不足情報が整理された状態になります。</p>
-                <details class="prompt-accordion" id="step1Accordion" open>
-                  <summary>ChatGPTへ送る文章を見る</summary>
-                  <div class="accordion-content"><pre class="prompt-text" id="step1Prompt">以下の資料を読み込み、次の内容を整理してください。
-
-・重要なポイント
-・重複している内容
-・不足している情報
-・会議資料へ入れるべき項目
-
-最後に、会議資料の目次案も作成してください。</pre><div class="copy-row"><button class="btn secondary" id="step1CopyBtn">コピーする</button><span class="copy-status" id="step1CopyStatus" role="status" aria-live="polite"></span></div></div>
-                </details>
-                <div class="step-complete" id="step1Complete" aria-live="polite"><span class="complete-icon" aria-hidden="true">✓</span><strong>STEP1 COMPLETE!</strong><p>情報整理が完了しました！<br>次は目次を作成します。</p><button class="btn primary" id="step2Btn">次のSTEPへ <span aria-hidden="true">→</span></button></div>
-              </div>
-            </article>
-            <article class="step-stage" id="step2Stage" aria-labelledby="step2Title" data-step="2">
-              <header class="step-header">
-                <div class="step-kicker"><span>STEP2 / 5</span><span>目次作成ミッション</span></div>
-                <h2 class="step-heading" id="step2Title" tabindex="-1"><span class="step-icon" aria-hidden="true">🗂</span>目次を作る</h2>
-                <div class="step-progress" aria-label="全5STEP中2STEP"><div class="step-progress-track"><div class="step-progress-fill" style="width:40%"></div></div><span class="step-progress-label" id="step2Progress">2 / 5 STEP · 40%</span></div>
-              </header>
-              <div class="step-body">
-                <p class="step-lead">情報整理が終わったら、次は内容を読みやすい順番に並べます。<br><strong>目次を先に作ることで、本文を書く時間を大幅に短縮できます。</strong><br>初心者でもこの順番で進めれば、自然な資料構成になります。</p>
-                <h3 class="step-section-title">このSTEPを終えると、このような目次になります</h3>
-                <div class="example-card"><ol><li>会議の目的</li><li>現状</li><li>課題</li><li>提案内容</li><li>今後のスケジュール</li></ol></div>
-                <details class="prompt-accordion" id="step2Accordion">
-                  <summary>ChatGPTへ送る文章（プロンプト）</summary>
-                  <div class="accordion-content"><pre class="prompt-text" id="step2Prompt">STEP1で整理した内容をもとに、会議資料の目次を作成してください。
-
-【条件】
-・5～7項目程度
-・論理的な順番
-・読みやすい構成
-・重複を避ける
-・初心者にも分かりやすい見出し
-
-【出力形式】
-# タイトル
-
-## 1.
-## 2.
-## 3.
-・・・</pre><div class="copy-row"><button class="btn secondary" id="step2CopyBtn">コピーする</button><span class="copy-status" id="step2CopyStatus" role="status" aria-live="polite"></span></div></div>
-                </details>
-                <div class="step-complete" id="step2Complete" aria-live="polite"><span class="complete-icon" aria-hidden="true">✓</span><strong>STEP2 COMPLETE!</strong><p>目次作成が完了しました！<br>2つのミッションをクリアしました。</p></div>
-              </div>
-            </article>
+            <nav class="mission-list" id="missionList" aria-label="ミッション一覧"></nav>
+            <div id="missionMount"></div>
           </div>
         </div>
-        <div class="restart"><button class="btn ghost" id="restartBtn">もう一度診断する</button><p class="footer-note">この診断結果は回答に基づく目安です。業務内容やAIの利用環境により異なります。</p></div>
       </div>
     </section>
   </main>
@@ -214,66 +159,247 @@
       $('stars').setAttribute('aria-label', `AIとの相性 5段階中${starCount}`); $('compatText').textContent = compatibility;
     }
 
-    // パネルの表示状態とaria属性を揃え、支援技術にも状態を伝えます。
-    function togglePanel(buttonId,panelId){
-      const panel = $(panelId); const open = panel.classList.toggle('open');
-      $(buttonId).setAttribute('aria-expanded', String(open));
-      if(open) panel.scrollIntoView({behavior:'smooth',block:'nearest'});
+    // STEPの内容はこの配列だけで管理します。今後の追加・修正もここだけで完結します。
+    const missions = [
+      { icon:'📋', title:'情報を整理する', short:'情報整理', mission:'情報整理ミッション', description:'最初のミッションは、資料の内容を分かりやすく整理することです。', benefit:'AIに資料の要点や不足情報をまとめてもらうと、目次づくりがスムーズになります。', outcome:'重要なポイントや不足情報が整理された状態', example:['重要なポイント','重複している内容','不足している情報','会議資料へ入れるべき項目'], prompt:`以下の資料を読み込み、次の内容を整理してください。
+
+・重要なポイント
+・重複している内容
+・不足している情報
+・会議資料へ入れるべき項目
+
+最後に、会議資料の目次案も作成してください。` },
+      { icon:'🗂', title:'目次を作る', short:'目次作成', mission:'目次作成ミッション', description:'整理した内容を、読み手が理解しやすい順番へ並べます。', benefit:'目次を先に作ることで、本文を書く時間を大幅に短縮できます。', outcome:'会議の流れが伝わる5～7項目の目次', example:['会議の目的','現状','課題','提案内容','今後のスケジュール'], prompt:`STEP1で整理した内容をもとに、会議資料の目次を作成してください。
+
+【条件】
+・5～7項目程度
+・論理的な順番
+・読みやすい構成
+・重複を避ける
+・初心者にも分かりやすい見出し
+
+【出力形式】
+# タイトル
+## 1.
+## 2.
+## 3.
+・・・` },
+      { icon:'📝', title:'本文を作る', short:'本文作成', mission:'本文作成ミッション', description:'目次が完成したら、各スライドへ入れる本文を作成します。', benefit:'AIに本文を作成してもらい、<br>内容だけ自分で確認・修正しましょう。<br><br>長い文章ではなく、<br>1スライドにつき1つのメッセージを意識すると、<br>伝わりやすい資料になります。', outcome:'各スライドごとの本文', exampleSections:[{title:'会議の目的',body:'売上向上のため、\n新しい施策を検討する。'},{title:'現状',body:'昨年度より\n来店数が8％減少。'},{title:'課題',body:'・新規顧客が減少\n・既存顧客のリピート率低下'},{title:'提案内容',body:'・SNS広告の改善\n・キャンペーン実施'}], prompt:`STEP2で作成した目次をもとに、
+各見出しごとの本文を作成してください。
+
+【条件】
+・1スライドにつき1メッセージ
+・箇条書きを中心
+・1項目3〜5行程度
+・初心者にも分かりやすい文章
+・必要に応じて図表やグラフがあると分かりやすい箇所も提案してください
+・PowerPointへそのまま貼り付けられる文章量にしてください
+
+【出力形式】
+# スライド1
+
+タイトル
+
+本文
+
+----------------
+
+# スライド2
+
+タイトル
+
+本文
+
+----------------
+
+以降も同様` },
+      { icon:'🎨', title:'スライドを作る', short:'スライド作成', mission:'スライド作成ミッション', description:'本文が完成したら、<br>PowerPointへ貼り付けやすい形へ整理します。', benefit:'AIにスライド構成を整えてもらい、<br>見た目やデザインだけ自分で調整しましょう。<br><br>1スライドにつき<br>1つのメッセージを意識すると、<br>伝わりやすい資料になります。', outcome:'PowerPointへ貼り付けられるスライド構成', completeMessage:'スライド構成が完成しました！<br>PowerPointへ貼り付ける準備が整いました。', exampleSections:[{title:'【スライド1】',marker:false,body:'タイトル\n会議の目的\n\n──────────\n\n本文\n・売上向上\n・新施策を検討\n\n──────────\n\n図表提案\n売上推移グラフ\n\n──────────\n\n画像提案\n会議・プレゼンのイラスト'},{title:'【スライド2】',marker:false,body:'タイトル\n現状\n\n──────────\n\n本文\n・来店数8％減少\n・前年比比較\n\n──────────\n\n図表提案\n棒グラフ\n\n──────────\n\n画像提案\n店舗写真'},{title:'【スライド3】',marker:false,body:'タイトル\n課題\n\n──────────\n\n本文\n・新規顧客減少\n・リピート率低下\n\n──────────\n\n図表提案\n比較表\n\n──────────\n\n画像提案\n課題をイメージするアイコン'}], prompt:`STEP3で作成した本文をもとに、
+PowerPointへ貼り付けやすいスライド構成へ整理してください。
+
+【条件】
+・1スライドにつき1テーマ
+・タイトルを付ける
+・箇条書きを中心
+・PowerPointへ貼り付けやすい文章量
+・図・表・グラフを入れると分かりやすい箇所は提案する
+・アイコンや画像を入れると効果的な箇所も提案する
+・シンプルで見やすいビジネス向けデザインを意識する
+・1スライドに情報を詰め込みすぎない
+
+【出力形式】
+# スライド1
+
+タイトル
+
+本文
+
+図表提案
+
+画像提案
+
+────────────────
+
+# スライド2
+
+タイトル
+
+本文
+
+図表提案
+
+画像提案
+
+────────────────
+
+以降も同様` },
+      { icon:'🎤', title:'発表準備をする', short:'発表準備', mission:'発表準備ミッション', description:'資料が完成したら、<br>最後は発表の準備です。', benefit:'AIに発表原稿や想定質問を作成してもらうことで、<br>安心して会議本番を迎えられます。<br><br>時間配分も確認しながら、<br>実際に話すイメージを作りましょう。', outcome:'会議本番で使える発表準備', exampleSections:[{title:'発表時間',body:'約10分'},{title:'発表の流れ',body:'①会議の目的\n②現状\n③課題\n④改善案\n⑤まとめ'},{title:'発表原稿',body:'本日は〇〇についてご説明します。\n\nまず現状をご説明します。\n\n次に課題についてご説明します。\n\n最後に改善案をご紹介します。'},{title:'想定質問',body:'Q.\nなぜこの改善案を選びましたか？\n\nA.\n費用対効果が高いためです。\n\n────────────────\n\nQ.\n導入リスクはありますか？\n\nA.\n初期費用は必要ですが、\n長期的な効果が期待できます。'}], prompt:`STEP4で完成したスライド構成をもとに、
+会議本番に向けた発表準備を作成してください。
+
+【作成内容】
+・発表時間の目安
+・発表原稿
+・話す順番
+・スライドごとの説明内容
+・強調すべきポイント
+・想定質問と回答（5問程度）
+・発表時の注意点
+
+【条件】
+・初心者でも話しやすい文章
+・PowerPointの流れに沿って説明
+・1スライドごとに区切る
+・発表時間は約10分を想定
+・自然な話し言葉で作成する
+
+【出力形式】
+# 発表時間
+# 発表の流れ
+# 発表原稿
+# 想定質問
+# 発表時のポイント
+# 注意点` }
+    ];
+
+    let activeStep = 1;
+    const completedSteps = new Set();
+
+    // ミッション一覧を現在・完了・未完了の3状態で更新します。
+    function updateMissionList(){
+      $('missionList').innerHTML = missions.map((mission,index) => {
+        const step = index + 1;
+        const isDone = completedSteps.has(step);
+        const isCurrent = step === activeStep;
+        const state = `${isDone ? 'done' : ''} ${isCurrent ? 'current' : ''}`;
+        const label = isDone && isCurrent ? '✓ COMPLETE · 現在' : isDone ? '✓ COMPLETE' : isCurrent ? '現在' : '';
+        return `<button class="mission-tab ${state}" data-go-step="${step}" aria-current="${step === activeStep ? 'step' : 'false'}"><span>STEP${step} ${mission.short}</span><span class="tab-state">${label}</span></button>`;
+      }).join('');
+      $('missionList').querySelectorAll('[data-go-step]').forEach(button => button.addEventListener('click', () => showStep(Number(button.dataset.goStep))));
     }
 
-    // STEP3以降でも使い回せるコピー処理。成功・失敗の案内は読み上げにも対応します。
-    async function copyText(sourceId, statusId, successMessage){
-      const status = $(statusId);
+    // 通常の箇条書き例と、STEP3のような複数セクション例を同じ枠内へ描画します。
+    function renderExample(mission){
+      if(mission.exampleSections){
+        return `<div class="example-sections">${mission.exampleSections.map(section => `<section class="example-section"><strong>${section.marker === false ? '' : '■ '}${section.title}</strong><p>${section.body}</p></section>`).join('')}</div>`;
+      }
+      return `<ol>${mission.example.map(item => `<li>${item}</li>`).join('')}</ol>`;
+    }
+
+    // 最終STEPだけは、共通COMPLETE表示に全STEPの振り返りとCTAを追加します。
+    function renderCompletion(mission, completed){
+      if(activeStep < missions.length){
+        return `<div class="step-complete ${completed ? 'show' : ''}" id="activeComplete" aria-live="polite"><span class="complete-icon" aria-hidden="true">✓</span><strong>STEP${activeStep} COMPLETE!</strong><p>${mission.completeMessage || `${mission.short}が完了しました！`}</p></div>`;
+      }
+      return `<div class="step-complete final-step-complete ${completed ? 'show' : ''}" id="activeComplete" aria-live="polite"><span class="congrats">🎉 CONGRATULATIONS!</span><strong>STEP5 COMPLETE!</strong><p>AIを活用した会議資料作成を<br>最後まで完了しました！<br><br>お疲れさまでした！</p><ul class="final-checklist"><li>✅ STEP1 情報整理</li><li>✅ STEP2 目次作成</li><li>✅ STEP3 本文作成</li><li>✅ STEP4 スライド作成</li><li>✅ STEP5 発表準備</li></ul></div>
+        <div class="final-after-complete"><section class="flow-summary"><h3>あなたが体験したAI資料作成フロー</h3><div class="flow-list"><span>① 情報整理</span><span>↓</span><span>② 目次作成</span><span>↓</span><span>③ 本文作成</span><span>↓</span><span>④ スライド作成</span><span>↓</span><span>⑤ 発表準備</span></div><p>この5STEPは、そのまま実際の業務でも利用できます。<br><br>ぜひ自社の資料や会議資料を使って、<br>ChatGPTと一緒に資料作成を体験してみてください。</p></section><div class="final-cta"><button class="btn secondary step-control" id="copyAllBtn">全プロンプトをまとめてコピー</button><button class="btn primary step-control" id="finalRestartBtn">もう一度診断する</button><span class="copy-status" id="copyAllStatus" role="status" aria-live="polite"></span></div><p class="final-note">この診断結果は回答に基づく目安です。業務内容やAIの利用環境により異なります。</p></div>`;
+    }
+
+    // 選択中のSTEPカードを共通レイアウトで生成します。
+    function renderStep(){
+      const mission = missions[activeStep - 1];
+      const completed = completedSteps.has(activeStep);
+      const previous = activeStep - 1;
+      const next = activeStep + 1;
+      $('missionMount').innerHTML = `<article class="step-stage active ${completed ? 'completed' : ''}" id="activeStepCard" data-step="${activeStep}" aria-labelledby="activeStepTitle">
+        <header class="step-header">
+          <nav class="step-nav" aria-label="STEP移動"><button class="step-nav-button" data-go-step="${previous}" ${activeStep === 1 ? 'hidden' : ''}>◀ STEP${previous}</button><span class="step-nav-current">STEP${activeStep} / 5</span><button class="step-nav-button" data-go-step="${next}" ${activeStep === missions.length ? 'hidden' : ''}>STEP${next} ▶</button></nav>
+          <div class="step-kicker"><span>STEP${activeStep} / 5</span><span>${mission.mission}</span></div>
+          <h2 class="step-heading" id="activeStepTitle" tabindex="-1"><span class="step-icon" aria-hidden="true">${mission.icon}</span>${mission.title}</h2>
+          <div class="step-progress" aria-label="全5STEP中${activeStep}STEP"><div class="step-progress-track"><div class="step-progress-fill" style="width:${activeStep * 20}%"></div></div><span class="step-progress-label" id="activeProgress">${completed ? `STEP${activeStep} COMPLETE` : `${activeStep} / 5 STEP`}・${activeStep * 20}%</span></div>
+        </header>
+        <div class="step-body">
+          <p class="step-lead">${mission.description}<br><strong>${mission.benefit}</strong></p>
+          <h3 class="step-section-title">このSTEPを終えると完成するもの</h3>
+          <p class="howto-result">${mission.outcome}</p>
+          <div class="example-card">${renderExample(mission)}</div>
+          <details class="prompt-accordion" ${activeStep === 1 ? 'open' : ''}><summary>ChatGPTへ送る文章を見る</summary><div class="accordion-content"><pre class="prompt-text" id="activePrompt"></pre><div class="prompt-copy-area"><button class="btn secondary step-control" id="copyPromptBtn">コピーする</button><span class="copy-status" id="activeCopyStatus" role="status" aria-live="polite"></span></div></div></details>
+          ${renderCompletion(mission, completed)}
+          <nav class="step-bottom-nav" aria-label="下部STEP移動"><button class="btn ghost step-control step-bottom-button" data-go-step="${previous}" ${activeStep === 1 ? 'hidden' : ''}>← 前のSTEP</button><button class="btn primary step-control step-bottom-button" data-go-step="${next}" ${activeStep === missions.length ? 'hidden' : ''}>次のSTEPへ <span aria-hidden="true">→</span></button></nav>
+        </div>
+      </article>`;
+      $('activePrompt').textContent = mission.prompt;
+      $('copyPromptBtn').addEventListener('click', () => copyPrompt(activeStep));
+      $('missionMount').querySelectorAll('[data-go-step]').forEach(button => button.addEventListener('click', () => showStep(Number(button.dataset.goStep))));
+      if($('copyAllBtn')) $('copyAllBtn').addEventListener('click', copyAllPrompts);
+      if($('finalRestartBtn')) $('finalRestartBtn').addEventListener('click', restartExperience);
+    }
+
+    // 一覧・前後ナビ・ボタンのどこからでも同じ処理でSTEPを移動します。
+    function showStep(stepNumber, focusHeading=true){
+      if(stepNumber < 1 || stepNumber > missions.length) return;
+      activeStep = stepNumber;
+      updateMissionList();
+      renderStep();
+      if(focusHeading) $('activeStepTitle').focus({preventScroll:true});
+      // STEP一覧を含むカード先頭へ戻し、連続して別のSTEPを選びやすくします。
+      $('journeyPanel').scrollIntoView({behavior:'smooth',block:'start'});
+    }
+
+    // 完了状態はSetで保持し、「もう一度診断する」まで失われません。
+    function completeStep(stepNumber){
+      completedSteps.add(stepNumber);
+      $('activeStepCard').classList.add('completed');
+      $('activeComplete').classList.add('show');
+      $('activeProgress').textContent = `STEP${stepNumber} COMPLETE・${stepNumber * 20}%`;
+      updateMissionList();
+    }
+
+    // 個別STEPの文章をコピーし、成功時だけCOMPLETE状態へ変更します。
+    async function copyPrompt(stepNumber){
+      const status = $('activeCopyStatus');
       try {
-        await navigator.clipboard.writeText($(sourceId).textContent);
-        status.textContent = successMessage;
-        setTimeout(() => { status.textContent=''; }, 2500);
-        return true;
+        await navigator.clipboard.writeText(missions[stepNumber - 1].prompt);
+        status.textContent = 'コピーしました';
+        completeStep(stepNumber);
+        setTimeout(() => { if(status.isConnected) status.textContent=''; }, 2500);
       } catch {
         status.textContent = 'コピーできませんでした。文章を選択してコピーしてください。';
-        return false;
       }
     }
 
-    // 共通のSTEP切り替え処理。今後のSTEPカードも同じ仕組みで追加できます。
-    function showStep(stepNumber){
-      document.querySelectorAll('.step-stage').forEach(stage => stage.classList.remove('active'));
-      const nextStage = $(`step${stepNumber}Stage`);
-      nextStage.classList.add('active');
-      nextStage.querySelector('h2').focus({preventScroll:true});
-      nextStage.scrollIntoView({behavior:'smooth',block:'start'});
+    // 5つの文章をSTEP番号付きでまとめ、1回でコピーします。
+    async function copyAllPrompts(){
+      const allText = missions.map((mission,index) => `STEP${index + 1}\n\n${mission.prompt}`).join('\n\n━━━━━━━━━━\n\n');
+      try {
+        await navigator.clipboard.writeText(allText);
+        $('copyAllStatus').textContent = 'すべてコピーしました';
+        setTimeout(() => { $('copyAllStatus').textContent=''; }, 2500);
+      } catch { $('copyAllStatus').textContent = 'コピーできませんでした。'; }
     }
 
-    // コピー成功をミッション完了として表示します。STEP番号だけで共通利用できます。
-    function completeStep(stepNumber){
-      $(`step${stepNumber}Stage`).classList.add('completed');
-      $(`step${stepNumber}Complete`).classList.add('show');
-      $(`step${stepNumber}Progress`).textContent = `STEP${stepNumber} COMPLETE · ${stepNumber * 20}%`;
+    function restartExperience(){
+      currentQuestion=0; answers=[]; activeStep=1; completedSteps.clear();
+      $('journeyPanel').classList.remove('open'); $('journeyBtn').setAttribute('aria-expanded','false');
+      updateMissionList(); renderStep(); showScreen('home');
     }
 
     $('startBtn').addEventListener('click', () => { currentQuestion=0; answers=[]; renderQuestion(); showScreen('quiz'); });
-    $('journeyBtn').addEventListener('click', () => togglePanel('journeyBtn','journeyPanel'));
-    $('step1CopyBtn').addEventListener('click', async () => {
-      const copied = await copyText('step1Prompt','step1CopyStatus','コピーしました。STEP1クリアです！');
-      if(copied) completeStep(1);
+    $('journeyBtn').addEventListener('click', () => {
+      const open = $('journeyPanel').classList.toggle('open');
+      $('journeyBtn').setAttribute('aria-expanded', String(open));
+      if(open) showStep(activeStep, false);
     });
-    $('step2Btn').addEventListener('click', () => showStep(2));
-    $('step2CopyBtn').addEventListener('click', async () => {
-      const copied = await copyText('step2Prompt','step2CopyStatus','コピーしました。STEP2クリアです！');
-      if(copied) completeStep(2);
-    });
-    $('restartBtn').addEventListener('click', () => {
-      currentQuestion=0; answers=[];
-      $('journeyPanel').classList.remove('open'); $('journeyBtn').setAttribute('aria-expanded','false');
-      $('step1Stage').classList.add('active'); $('step2Stage').classList.remove('active');
-      [1,2].forEach(step => {
-        $(`step${step}Stage`).classList.remove('completed');
-        $(`step${step}Complete`).classList.remove('show');
-        $(`step${step}Accordion`).open = step === 1;
-        $(`step${step}Progress`).textContent = `${step} / 5 STEP · ${step * 20}%`;
-      });
-      showScreen('home');
-    });
+    updateMissionList();
+    renderStep();
   </script>
 </body>
 </html>
