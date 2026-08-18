@@ -122,47 +122,38 @@
       { id:'numbers', icon:'📈', name:'部門数字の説明文作成', resultName:'部門数字説明', frequency:'月次', available:true }
     ];
 
-    // 質問データと各回答の効率化余地（0＝すでに効率的、4＝改善余地が大きい）を一元管理します。
+    // 最初の5問は全業務で共有し、選択業務ごとに2問だけ追加して3分以内の回答量に抑えます。
+    const commonQuestions = [
+      { text:'生成AIの利用状況を教えてください。', options:['利用していない','少し使う','よく使う'] },
+      { text:'選択した業務は、1週間にどれくらい発生しますか？', options:['週1回未満','週1回','週2〜3回','週4回以上'] },
+      { text:'1回あたりの作業時間はどれくらいですか？', options:['15分以内','15〜30分','30分〜1時間','1時間以上'] },
+      { text:'現在はどのように作業していますか？', options:['毎回ゼロから作る','過去資料を参考にする','テンプレートを利用する','AIを利用している'] },
+      { text:'AI導入への抵抗感はありますか？', options:['かなり抵抗がある','少し抵抗がある','あまり抵抗はない','抵抗はない'] }
+    ];
+
     const meetingQuestions = [
-      { text:'会議資料を1回作成するのにどれくらい時間がかかりますか？', options:['30分以内','30分～1時間','1～2時間','2～3時間','3時間以上'], values:[.4,.75,1.5,2.5,3.5] },
-      { text:'会議資料を作成する際、参考資料はどのような状態ですか？', options:['毎回、紙資料やメールなど複数の場所から集めている','過去資料はあるがPDF・Word・Excelなど複数形式で管理している','フォルダやクラウドに整理されており、すぐ利用できる','AIも活用しながら資料を整理・活用している'], values:[4,3,1,0] },
-      { text:'参考にする資料はどれくらいありますか？', options:['1～2件','3～5件','6～10件','10件以上'], values:[1,2,3,4] },
-      { text:'会議資料の構成（目次）は普段どのように作成していますか？', options:['毎回ゼロから考えている','過去資料を流用している','テンプレートを利用している','AIで目次を作成している'], values:[4,2,1,0] },
-      { text:'スライドはどのように作成していますか？', options:['毎回ゼロから作成している','過去資料を流用している','テンプレートを利用している','AIを活用している'], values:[4,2,1,0] },
-      { text:'発表準備はどのようにしていますか？', options:['原稿をすべて作成している','箇条書きだけ作成している','スライドのみで発表している','AIを活用している'], values:[4,2,1,0] },
-      { text:'発表時間はどれくらいですか？', options:['5分以内','10分程度','15～30分','30分以上'], values:[.25,.5,1,1.5] }
+      { text:'会議資料の参考資料はどのような状態ですか？', options:['複数の場所に分散している','複数形式で管理している','整理されており、すぐ使える','AIも使って整理している'] },
+      { text:'発表準備はどのようにしていますか？', options:['原稿をすべて作る','箇条書きを作る','スライドのみで発表する','AIを利用している'] }
     ];
 
     const reportQuestions = [
-      { text:'部下は何名いますか？', options:['1〜3人','4〜7人','8〜10人','11人以上'] },
-      { text:'週報はどのくらい読みますか？', options:['5分以内','5〜10分','10〜20分','20分以上'] },
-      { text:'取りまとめ後にコメントやフィードバックを書きますか？', options:['ほぼ書かない','一言だけ','毎回コメントを書く','詳細なフィードバックを書く'] },
-      { text:'内容を上司へ報告する資料を作りますか？', options:['作らない','簡単にまとめる','毎週まとめる'] },
-      { text:'ChatGPTなど生成AIは使っていますか？', options:['全く使っていない','少し使っている','よく使っている'] }
+      { text:'週報・日報を提出する部下は何名ですか？', options:['1〜3人','4〜7人','8〜10人','11人以上'] },
+      { text:'内容を上司へ報告する資料を作成しますか？', options:['作成しない','必要な時だけ簡単にまとめる','毎週簡単にまとめる','毎週詳しくまとめる'] }
     ];
 
     const evaluationQuestions = [
       { text:'評価対象の部下は何名ですか？', options:['1～3人','4～7人','8～10人','11人以上'] },
-      { text:'評価コメントはどの程度書いていますか？', options:['一言だけ','100文字程度','200文字程度','300文字以上'] },
-      { text:'評価材料はどのように確認していますか？', options:['記憶だけで書く','面談メモを確認する','日報・週報も確認する','複数資料を確認する'] },
-      { text:'評価コメントを毎回ゼロから書いていますか？', options:['毎回ゼロから','過去コメントを参考にする','テンプレートを使う','AIを使っている'] },
-      { text:'生成AIの利用状況', options:['利用していない','少し使う','よく使う'] }
+      { text:'評価材料はどのように確認していますか？', options:['記憶を中心に確認する','面談メモを確認する','日報・週報も確認する','複数資料を詳しく確認する'] }
     ];
 
     const approvalQuestions = [
-      { text:'稟議・申請書はどれくらい作成しますか？', options:['月1回未満','月1〜2回','月3〜5回','月6回以上'] },
-      { text:'説明文は毎回どのように作成していますか？', options:['毎回ゼロから書く','過去の申請書を参考にする','テンプレートを利用する','AIを利用している'] },
-      { text:'申請理由を整理するのに時間はかかりますか？', options:['ほとんどかからない','少しかかる','毎回悩む','非常に時間がかかる'] },
-      { text:'上司から修正依頼はありますか？', options:['ほとんどない','時々ある','毎回ある','大幅な修正が多い'] },
-      { text:'生成AIの利用状況', options:['利用していない','少し使う','よく使う'] }
+      { text:'上司からの修正依頼はどれくらいありますか？', options:['ほとんどない','時々ある','毎回ある','大幅な修正が多い'] },
+      { text:'申請書の説明文作成をどの程度難しいと感じますか？', options:['難しくない','少し難しい','毎回悩む','非常に難しい'] }
     ];
 
     const numbersQuestions = [
-      { text:'部門数字の報告はどのくらい作成しますか？', options:['月1回','月2〜3回','毎週','週2回以上'] },
-      { text:'説明文はどのように作成していますか？', options:['毎回ゼロから書く','過去資料を参考にする','テンプレートを利用する','AIを利用している'] },
       { text:'数字の分析にどれくらい時間がかかりますか？', options:['5分以内','5〜15分','15〜30分','30分以上'] },
-      { text:'説明文の修正はどれくらいありますか？', options:['ほとんどない','時々ある','毎回ある','大幅修正が多い'] },
-      { text:'生成AIの利用状況', options:['利用していない','少し使う','よく使う'] }
+      { text:'説明文の修正はどれくらいありますか？', options:['ほとんどない','時々ある','毎回ある','大幅修正が多い'] }
     ];
 
     const questionSets = { reports:reportQuestions, meeting:meetingQuestions, evaluation:evaluationQuestions, approval:approvalQuestions, numbers:numbersQuestions };
@@ -209,7 +200,9 @@
         $('workSelectionMessage').classList.add('notice');
         return;
       }
-      activeQuestions = supportedSelections.flatMap(work => questionSets[work.id].map((question,index) => ({...question,workId:work.id,questionIndex:index})));
+      const sharedQuestions = commonQuestions.map((question,index) => ({...question,workId:'common',questionIndex:index}));
+      const selectedQuestions = supportedSelections.flatMap(work => questionSets[work.id].map((question,index) => ({...question,workId:work.id,questionIndex:index})));
+      activeQuestions = [...sharedQuestions,...selectedQuestions];
       currentQuestion=0; answers=[]; renderQuestion(); showScreen('quiz');
     }
 
@@ -293,96 +286,63 @@
       else { calculateResult(); showScreen('result'); }
     }
 
-    // 既存の会議資料ロジックをそのまま独立関数化します。
-    function calculateMeetingResult(selectedAnswers){
-      const currentHours = meetingQuestions[0].values[selectedAnswers[0]];
-      const scores = {
-        '情報整理':meetingQuestions[1].values[selectedAnswers[1]] * 1.2 + meetingQuestions[2].values[selectedAnswers[2]] * .8,
-        '目次作成':meetingQuestions[3].values[selectedAnswers[3]] * 1.4,
-        'スライド作成':meetingQuestions[4].values[selectedAnswers[4]] * 1.5,
-        '発表準備':meetingQuestions[5].values[selectedAnswers[5]] + meetingQuestions[6].values[selectedAnswers[6]]
-      };
-      const opportunity = Object.values(scores).reduce((a,b) => a+b,0);
-      const rate = Math.min(.68,.15 + (opportunity / 25) * .53);
-      const saved = currentHours * rate;
-      const priority = Object.entries(scores).sort((a,b) => b[1]-a[1])[0][0];
-      const reasons = {'情報整理':'資料の収集・読み込み・重複確認をAIで下準備すると、後工程もまとめて短縮しやすいためです。','目次作成':'目的と要点を渡して構成案を複数出すことで、ゼロから考える時間を減らせるためです。','スライド作成':'構成から本文のたたき台までAIに任せることで、作成時間への効果が大きいためです。','発表準備':'発表時間に合わせた原稿や想定質問の初稿をAIで素早く用意できるためです。'};
-      return {id:'meeting',current:currentHours,after:currentHours-saved,saved,rate,priority,reason:reasons[priority],starCount:Math.max(1,Math.min(5,Math.ceil(opportunity/5)))};
+    // 共通5問から基礎工数とAIによる削減余地を算出し、業務別2問で補正します。
+    function calculateSharedWorkload(commonAnswers,specificFactor,minSaved,maxSaved){
+      const weeklyFrequency = [.35,1,2.5,4][commonAnswers[1]];
+      const duration = [.25,.5,.85,1.4][commonAnswers[2]];
+      const methodOpportunity = [1,.82,.65,.4][commonAnswers[3]];
+      const aiOpportunity = [.72,.56,.4][commonAnswers[0]];
+      const readiness = [.68,.82,.93,1][commonAnswers[4]];
+      const current = weeklyFrequency * duration * (.75 + methodOpportunity * .25);
+      const estimatedSaving = weeklyFrequency * duration * (.28 + methodOpportunity * .42) * aiOpportunity * readiness * specificFactor;
+      const saved = Math.max(minSaved,Math.min(maxSaved,estimatedSaving));
+      const adjustedCurrent = Math.max(current,saved + .2);
+      return {current:adjustedCurrent,saved,after:adjustedCurrent-saved};
     }
 
-    // 週報・日報は回答負荷とAI利用状況から、週0.3〜2.0時間の範囲で算出します。
-    function calculateReportResult(selectedAnswers){
-      const workload = [0.25,.55,.85,1.15][selectedAnswers[0]] + [0.1,.25,.45,.65][selectedAnswers[1]] + [0,.12,.3,.5][selectedAnswers[2]] + [0,.2,.4][selectedAnswers[3]];
-      const aiMultiplier = [.78,.62,.45][selectedAnswers[4]];
-      const saved = Math.max(.3,Math.min(2,workload * aiMultiplier));
-      const current = Math.max(saved + .3,workload + .4);
-      const scores = {'週報・日報を読む':selectedAnswers[0] + selectedAnswers[1] + 2,'内容の要約・課題抽出':selectedAnswers[0] + (2-selectedAnswers[4]) + 2,'報告資料の整理':selectedAnswers[3] * 2 + 1,'フィードバック作成':selectedAnswers[2] * 1.5 + 1};
+    function buildWorkResult(id,workload,scores,reasons,starUnit){
       const priority = Object.entries(scores).sort((a,b) => b[1]-a[1])[0][0];
-      const reasons = {'週報・日報を読む':'複数人分の内容をAIで先に要約すると、確認時間をまとめて短縮できるためです。','内容の要約・課題抽出':'共通課題・重要事項・緊急事項をAIに整理させると、判断に集中できるためです。','報告資料の整理':'要約結果から上司向けの報告文を作る工程をAIで効率化できるためです。','フィードバック作成':'コメントのたたき台をAIで用意し、内容確認と個別調整に集中できるためです。'};
-      return {id:'reports',current,after:current-saved,saved,rate:saved/current,priority,reason:reasons[priority],starCount:Math.max(1,Math.min(5,Math.ceil(saved/.4)))};
+      return {id,current:workload.current,after:workload.after,saved:workload.saved,rate:workload.saved/workload.current,priority,reason:reasons[priority],starCount:Math.max(1,Math.min(5,Math.ceil(workload.saved/starUnit)))};
     }
 
-    // 評価コメントは、対象人数・文章量・確認資料・作成方法・AI利用状況から週換算します。
-    // 半期業務のため会議資料より控えめな、週0.2〜1.5時間の範囲に収めます。
-    function calculateEvaluationResult(selectedAnswers){
-      const workload = [0.18,.42,.68,.92][selectedAnswers[0]] + [0.08,.2,.34,.5][selectedAnswers[1]] + [0,.12,.24,.38][selectedAnswers[2]] + [.28,.16,.08,0][selectedAnswers[3]];
-      const aiMultiplier = [.76,.58,.4][selectedAnswers[4]];
-      const saved = Math.max(.2,Math.min(1.5,workload * aiMultiplier));
-      const current = Math.max(saved + .25,workload + .35);
-      const scores = {
-        '評価材料を集める':selectedAnswers[0] + selectedAnswers[2] * 1.4 + 1,
-        '内容を整理する':selectedAnswers[2] * 1.2 + (2-selectedAnswers[4]) + 1,
-        '評価コメントを書く':selectedAnswers[0] + selectedAnswers[1] * 1.5 + (3-selectedAnswers[3]),
-        '最終確認':selectedAnswers[1] + selectedAnswers[2] + 1
-      };
-      const priority = Object.entries(scores).sort((a,b) => b[1]-a[1])[0][0];
-      const reasons = {
-        '評価材料を集める':'面談メモや日報・週報から評価に必要な事実をAIで抽出すると、確認時間を短縮できるためです。',
-        '内容を整理する':'成果・課題・強み・成長点をAIで分類し、公平な評価判断に集中できるためです。',
-        '評価コメントを書く':'整理した評価材料からコメントの下書きをAIで作ることで、表現を考える時間を減らせるためです。',
-        '最終確認':'表現や公平性の確認観点をAIに洗い出させることで、抜け漏れを減らせるためです。'
-      };
-      return {id:'evaluation',current,after:current-saved,saved,rate:saved/current,priority,reason:reasons[priority],starCount:Math.max(1,Math.min(5,Math.ceil(saved/.3)))};
+    function calculateMeetingResult(commonAnswers,specificAnswers){
+      const factor = [.95,1.08,1.18,.8][specificAnswers[0]] * [1.18,1.05,.9,.75][specificAnswers[1]];
+      const workload = calculateSharedWorkload(commonAnswers,factor,.3,2.5);
+      const scores = {'情報整理':(3-specificAnswers[0])*1.8+1,'目次・本文作成':(3-commonAnswers[3])*1.3+1,'発表準備':(3-specificAnswers[1])*1.7+1};
+      const reasons = {'情報整理':'分散した参考資料の収集・要約をAIで下準備すると、後工程もまとめて短縮しやすいためです。','目次・本文作成':'資料の要点から構成と本文のたたき台を作り、ゼロから考える時間を減らせるためです。','発表準備':'発表原稿や想定質問の初稿をAIで素早く用意できるためです。'};
+      return buildWorkResult('meeting',workload,scores,reasons,.5);
     }
 
-    // 稟議・申請書は作成頻度と手戻りの大きさを週換算し、週0.2〜1.2時間の範囲で算出します。
-    function calculateApprovalResult(selectedAnswers){
-      const workload = [0.08,.22,.5,.85][selectedAnswers[0]] + [.25,.15,.07,0][selectedAnswers[1]] + [0,.12,.28,.45][selectedAnswers[2]] + [0,.12,.3,.48][selectedAnswers[3]];
-      const aiMultiplier = [.72,.55,.38][selectedAnswers[4]];
-      const saved = Math.max(.2,Math.min(1.2,workload * aiMultiplier));
-      const current = Math.max(saved + .2,workload + .3);
-      const scores = {
-        '必要情報を整理する':selectedAnswers[0] + selectedAnswers[2] * 1.4 + 1,
-        '説明文を作成する':selectedAnswers[0] + (3-selectedAnswers[1]) * 1.5 + selectedAnswers[2],
-        '最終確認・提出':selectedAnswers[3] * 1.8 + 1
-      };
-      const priority = Object.entries(scores).sort((a,b) => b[1]-a[1])[0][0];
-      const reasons = {
-        '必要情報を整理する':'申請目的・背景・効果・費用・リスクをAIで整理すると、説明文を書く前の準備時間を短縮できるためです。',
-        '説明文を作成する':'整理した情報から社内向け説明文の下書きをAIで作ることで、ゼロから文章を考える時間を減らせるためです。',
-        '最終確認・提出':'論理性や不足情報をAIで事前確認し、人は数値・社内ルール・最終判断に集中できるためです。'
-      };
-      return {id:'approval',current,after:current-saved,saved,rate:saved/current,priority,reason:reasons[priority],starCount:Math.max(1,Math.min(5,Math.ceil(saved/.24)))};
+    function calculateReportResult(commonAnswers,specificAnswers){
+      const factor = [.75,.95,1.12,1.3][specificAnswers[0]] * [.82,.95,1.08,1.22][specificAnswers[1]];
+      const workload = calculateSharedWorkload(commonAnswers,factor,.3,2);
+      const scores = {'週報・日報を読む':specificAnswers[0]*1.6+1,'内容の要約・課題抽出':specificAnswers[0]+(2-commonAnswers[0])+2,'報告資料の整理':specificAnswers[1]*1.8+1};
+      const reasons = {'週報・日報を読む':'複数人分の内容をAIで先に要約すると、確認時間をまとめて短縮できるためです。','内容の要約・課題抽出':'共通課題・重要事項・緊急事項をAIに整理させると、判断に集中できるためです。','報告資料の整理':'要約結果から上司向けの報告文を作る工程をAIで効率化できるためです。'};
+      return buildWorkResult('reports',workload,scores,reasons,.4);
     }
 
-    // 部門数字は報告頻度・分析時間・修正量を週換算し、週0.2〜1.2時間の範囲で算出します。
-    function calculateNumbersResult(selectedAnswers){
-      const workload = [.12,.3,.65,1][selectedAnswers[0]] + [.22,.14,.06,0][selectedAnswers[1]] + [.02,.12,.3,.5][selectedAnswers[2]] + [0,.1,.25,.4][selectedAnswers[3]];
-      const aiMultiplier = [.68,.52,.36][selectedAnswers[4]];
-      const saved = Math.max(.2,Math.min(1.2,workload * aiMultiplier));
-      const current = Math.max(saved + .2,workload + .3);
-      const scores = {
-        '数字・データを整理する':selectedAnswers[0] + selectedAnswers[2] * 1.6 + 1,
-        '説明文を作成する':selectedAnswers[0] + (3-selectedAnswers[1]) * 1.4 + selectedAnswers[2],
-        '最終確認・提出':selectedAnswers[3] * 1.7 + selectedAnswers[2] + 1
-      };
-      const priority = Object.entries(scores).sort((a,b) => b[1]-a[1])[0][0];
-      const reasons = {
-        '数字・データを整理する':'増減した項目や注目すべき数値をAIで先に整理すると、分析の起点を短時間で作れるためです。',
-        '説明文を作成する':'数値と増減要因から報告文の下書きをAIで作ることで、文章化の時間を減らせるためです。',
-        '最終確認・提出':'数字と説明の整合性や説明不足をAIで事前確認し、人は正確性と経営判断に集中できるためです。'
-      };
-      return {id:'numbers',current,after:current-saved,saved,rate:saved/current,priority,reason:reasons[priority],starCount:Math.max(1,Math.min(5,Math.ceil(saved/.24)))};
+    function calculateEvaluationResult(commonAnswers,specificAnswers){
+      const factor = [.72,.92,1.08,1.25][specificAnswers[0]] * [.82,.98,1.1,1.22][specificAnswers[1]];
+      const workload = calculateSharedWorkload(commonAnswers,factor,.2,1.5);
+      const scores = {'評価材料を集める':specificAnswers[0]+specificAnswers[1]*1.5+1,'内容を整理する':specificAnswers[1]*1.3+(2-commonAnswers[0])+1,'評価コメントを書く':specificAnswers[0]+(3-commonAnswers[3])*1.4+1};
+      const reasons = {'評価材料を集める':'面談メモや日報・週報から評価に必要な事実をAIで抽出すると、確認時間を短縮できるためです。','内容を整理する':'成果・課題・強み・成長点をAIで分類し、公平な評価判断に集中できるためです。','評価コメントを書く':'整理した評価材料からコメントの下書きをAIで作ることで、表現を考える時間を減らせるためです。'};
+      return buildWorkResult('evaluation',workload,scores,reasons,.3);
+    }
+
+    function calculateApprovalResult(commonAnswers,specificAnswers){
+      const factor = [.78,.94,1.12,1.28][specificAnswers[0]] * [.78,.94,1.12,1.3][specificAnswers[1]];
+      const workload = calculateSharedWorkload(commonAnswers,factor,.2,1.2);
+      const scores = {'必要情報を整理する':specificAnswers[1]*1.5+1,'説明文を作成する':specificAnswers[1]+(3-commonAnswers[3])*1.5+1,'最終確認・提出':specificAnswers[0]*1.8+1};
+      const reasons = {'必要情報を整理する':'申請目的・背景・効果・費用・リスクをAIで整理すると、説明文を書く前の準備時間を短縮できるためです。','説明文を作成する':'整理した情報から社内向け説明文の下書きをAIで作ることで、ゼロから文章を考える時間を減らせるためです。','最終確認・提出':'論理性や不足情報をAIで事前確認し、人は数値・社内ルール・最終判断に集中できるためです。'};
+      return buildWorkResult('approval',workload,scores,reasons,.24);
+    }
+
+    function calculateNumbersResult(commonAnswers,specificAnswers){
+      const factor = [.78,.94,1.12,1.3][specificAnswers[0]] * [.8,.95,1.12,1.28][specificAnswers[1]];
+      const workload = calculateSharedWorkload(commonAnswers,factor,.2,1.2);
+      const scores = {'数字・データを整理する':specificAnswers[0]*1.7+1,'説明文を作成する':specificAnswers[0]+(3-commonAnswers[3])*1.4+1,'最終確認・提出':specificAnswers[1]*1.8+1};
+      const reasons = {'数字・データを整理する':'増減した項目や注目すべき数値をAIで先に整理すると、分析の起点を短時間で作れるためです。','説明文を作成する':'数値と増減要因から報告文の下書きをAIで作ることで、文章化の時間を減らせるためです。','最終確認・提出':'数字と説明の整合性や説明不足をAIで事前確認し、人は正確性と経営判断に集中できるためです。'};
+      return buildWorkResult('numbers',workload,scores,reasons,.24);
     }
 
     function renderWorkflowDetails(workId){
@@ -426,12 +386,13 @@
         if(!answersByWork[question.workId]) answersByWork[question.workId] = [];
         answersByWork[question.workId][question.questionIndex] = answers[index];
       });
+      const commonAnswers = answersByWork.common;
       const workResults = {};
-      if(answersByWork.reports) workResults.reports = calculateReportResult(answersByWork.reports);
-      if(answersByWork.meeting) workResults.meeting = calculateMeetingResult(answersByWork.meeting);
-      if(answersByWork.evaluation) workResults.evaluation = calculateEvaluationResult(answersByWork.evaluation);
-      if(answersByWork.approval) workResults.approval = calculateApprovalResult(answersByWork.approval);
-      if(answersByWork.numbers) workResults.numbers = calculateNumbersResult(answersByWork.numbers);
+      if(answersByWork.reports) workResults.reports = calculateReportResult(commonAnswers,answersByWork.reports);
+      if(answersByWork.meeting) workResults.meeting = calculateMeetingResult(commonAnswers,answersByWork.meeting);
+      if(answersByWork.evaluation) workResults.evaluation = calculateEvaluationResult(commonAnswers,answersByWork.evaluation);
+      if(answersByWork.approval) workResults.approval = calculateApprovalResult(commonAnswers,answersByWork.approval);
+      if(answersByWork.numbers) workResults.numbers = calculateNumbersResult(commonAnswers,answersByWork.numbers);
       const rankedResults = Object.values(workResults).sort((a,b) => b.saved-a.saved);
       const primary = rankedResults[0];
       const currentHours = rankedResults.reduce((sum,result) => sum+result.current,0);
